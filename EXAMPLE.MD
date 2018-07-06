@@ -7,7 +7,7 @@
 
 ## 1] Python Script configuration
 
-Replace the BLINDS section of httpserver.py with your blind information. This requires finding the key. Whatever you name each blind is what needs to go in the config.json urls. The description can be whatever you want, the MAC address and key you must follow these instructions to get for your own blinds.
+Replace the BLINDS section of httpserver.py with your blind information. This requires finding the key. Whatever you name each blind is what needs to go in the config.json urls. The description can be whatever you want, [the MAC address and key you must follow these instructions to get for your own blinds](https://github.com/dnschneid/pysmartblinds/blob/master/README.md).
 
 ```
 BLINDS = {
