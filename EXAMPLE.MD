@@ -20,7 +20,7 @@ or setting up a systemd process to run it automatically as per the directions be
 
 ## 3] Python Script configuration
 
-Replace the BLINDS section of httpserver.py with your blind information. This requires finding the key. Whatever you name each blind is what needs to go in the config.json urls. The description can be whatever you want. AGAIN, [the MAC address and key you must follow these instructions to get for your own blinds](https://github.com/dnschneid/pysmartblinds/blob/master/README.md#discovering-mac-and-keys-for-blinds).
+Replace the BLINDS section of httpserver.py with your blind information. This requires finding the key. Whatever you name each blind is what needs to go in the config.json urls. The description can be whatever you want. AGAIN, [the MAC address and key you must follow these instructions to get for your own blinds](https://github.com/dnschneid/pysmartblinds/blob/master/README.md#discovering-mac-and-keys-for-blinds). Specifically each blind key is different, and is broken out in the script, so if your key is 112233445566aa for a blind, in the python script it is broken into groups of two like below.
 
 ```
 BLINDS = {
