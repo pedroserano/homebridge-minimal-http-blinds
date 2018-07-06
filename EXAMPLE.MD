@@ -1,13 +1,26 @@
 # Example implementation in Python
 
-## 1] Architecture
+## 1] Architecture (Assumes the following)
 
 - Homebridge server is : `192.168.1.22`
 - Raspberry Pi with the Python script controlling the blinds : `192.168.1.55`
+- You have your MAC address and key for each blind you wish to control by [following these instructions](https://github.com/dnschneid/pysmartblinds/blob/master/README.md).
 
-## 1] Python Script configuration
+## 2] Python installation
 
-Replace the BLINDS section of httpserver.py with your blind information. This requires finding the key. Whatever you name each blind is what needs to go in the config.json urls. The description can be whatever you want, [the MAC address and key you must follow these instructions to get for your own blinds](https://github.com/dnschneid/pysmartblinds/blob/master/README.md).
+````bash
+sudo apt install -y python3-pip
+pip3 install pygatt
+pip3 install pexpect
+````
+Finally, copy the two python files, httpserver.py and pysmartblinds.py to your raspberry pi's home folder.
+You must either run the program from the command line by typing:
+`python3 httpserver.py` 
+or setting up a systemd process to run it automatically as per the directions below.
+
+## 3] Python Script configuration
+
+Replace the BLINDS section of httpserver.py with your blind information. This requires finding the key. Whatever you name each blind is what needs to go in the config.json urls. The description can be whatever you want. AGAIN, [the MAC address and key you must follow these instructions to get for your own blinds](https://github.com/dnschneid/pysmartblinds/blob/master/README.md).
 
 ```
 BLINDS = {
@@ -28,6 +41,15 @@ BLINDS = {
     },
 }
 ```
+## 2] Homebridge plugin installation
+
+The installation instructions differ depending on how you installed homebridge. Until a more elegant program is written using noble or some other program that directly connects homebridge with the blinds, this solution requires a python script to both interface with the blinds (one at a time) and an httpserver for the urls to call in the homebridge plugin. This is super ugly and hacked together, but for now it works.
+
+Usually this will install it:
+````bash
+sudo npm install -g homebridge-mysmartblinds
+````
+
 ## 3] Homebridge accessory configuration
 
 Here is a homebridge `config.json` with the minimal valid configuration. The bridge information is already there unless you have not set up homebridge yet. You must add an accessory for each blind, and create a name for each blind, and change the ip address to wherever you are running the python script, this assumes you are running it on the same device as your homebridge. Also change the "living_room" to whatever you named the blind in httpserver.py: (example with 3, 1 for each blind):
@@ -48,25 +70,25 @@ Here is a homebridge `config.json` with the minimal valid configuration. The bri
         "name": "Living Room Middle",
         "accessory": "mysmartblinds",
 
-    "get_current_position_url": "http://127.0.0.1:1500/living_room_middle/pos",
-    "set_target_position_url": "http://127.0.0.1:1500/living_room_middle/set/%position%",
-    "get_current_state_url": "http://127.0.0.1:1500/living_room_middle/pos"
+    "get_current_position_url": "http://192.168.1.55:1500/living_room_middle/pos",
+    "set_target_position_url": "http://192.168.1.55:1500/living_room_middle/set/%position%",
+    "get_current_state_url": "http://192.168.1.55:1500/living_room_middle/pos"
     },
     {
         "accessory": "mysmartblinds",
         "name": "Living Room Right",
   
-            "get_current_position_url": "http://127.0.0.1:1500/living_room_right/pos",
-            "set_target_position_url": "http://127.0.0.1:1500/living_room_right/set/%position%",
-            "get_current_state_url": "http://127.0.0.1:1500/living_room_right/pos"
+            "get_current_position_url": "http://192.168.1.55:1500/living_room_right/pos",
+            "set_target_position_url": "http://192.168.1.55:1500/living_room_right/set/%position%",
+            "get_current_state_url": "http://192.168.1.55:1500/living_room_right/pos"
             },
         {
             "accessory": "mysmartblinds",
         "name": "Living Room Left",
   
-            "get_current_position_url": "http://127.0.0.1:1500/living_room_left/pos",
-            "set_target_position_url": "http://127.0.0.1:1500/living_room_left/set/%position%",
-            "get_current_state_url": "http://127.0.0.1:1500/living_room_left/pos"
+            "get_current_position_url": "http://192.168.1.55:1500/living_room_left/pos",
+            "set_target_position_url": "http://192.168.1.55:1500/living_room_left/set/%position%",
+            "get_current_state_url": "http://192.168.1.55:1500/living_room_left/pos"
 }
 
 ], 
