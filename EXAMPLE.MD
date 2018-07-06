@@ -30,9 +30,19 @@ BLINDS = {
 ```
 ## 3] Homebridge accessory configuration
 
-Here is the accessory I need to add:
+Here is a homebridge `config.json` with the minimal valid configuration. The bridge information is already there unless you have not set up homebridge yet. You must add an accessory for each blind, and create a name for each blind, and change the ip address to wherever you are running the python script, this assumes you are running it on the same device as your homebridge. Also change the "living_room" to whatever you named the blind in httpserver.py: (example with 3, 1 for each blind):
 
-``` json
+````json
+{
+    "bridge": {
+        "name": "DemoMinimalisticHttpBlinds",
+        "username": "AA:BB:CC:DD:EE:FF",
+        "port": 51826,
+        "pin": "123-45-678"
+    },
+  
+    "description": "DEV NODEJS MACBOOK",
+  
 "accessories": [
     {
         "name": "Living Room Middle",
@@ -59,6 +69,50 @@ Here is the accessory I need to add:
             "get_current_state_url": "http://127.0.0.1:1500/living_room_left/pos"
 }
 
-]
-```
+], 
+    "platforms": []
+}
+````
 
+Beware, these three parameters are not checked!  
+(`get_current_position_url`, `set_target_position_url`, `get_current_state_url`)  
+If you forgot to write them in your accessory, the module will crash.
+
+Also, in the `set_target_position_url` parameter, the placeholder `%position%` will be replaced by the value selected in the iPhone's Home App. 
+
+#### 3] Configuration to run the httpserver.py at startup using systemd (just like the instructions for having homebridge running using systemd)
+
+Enter the following command:
+`sudo nano /lib/systemd/system/pysmartblinds.service`
+
+Add the following text:
+```
+[Unit]
+Description=My Script Service
+After=multi-user.target
+
+[Service]
+WorkingDirectory=/home/pi/
+User=pi
+Type=idle
+ExecStart=/usr/bin/python3 /home/pi/httpserver.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+exit by hitting ctrl-x and hitting y to save.
+Then continue with the following commands to start it up:
+```
+sudo chmod 644 /lib/systemd/system/pysmartblinds.service
+sudo systemctl daemon-reload
+sudo systemctl enable pysmartblinds.service
+sudo systemctl start pysmartblinds.service
+```
+And if you want to check the status:
+
+`sudo systemctl status pysmartblinds.service`
+
+The httpserver.py should now be running.
+
+# That's all
