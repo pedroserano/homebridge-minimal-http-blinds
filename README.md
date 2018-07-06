@@ -27,6 +27,7 @@ pip3 install pygatt
 pip3 install pexpect
 sudo npm install -g homebridge-mysmartblinds
 ````
+Finally, copy the two python files, httpserver.py and pysmartblinds.py to your raspberry pi's home folder.
 
 #### 2] Minimal configuration
 
@@ -69,6 +70,40 @@ Also, in the `set_target_position_url` parameter, the placeholder `%position%` w
 ________________________________________
 
 [Click here](EXAMPLE.MD) to see an example implementation of this HTTP server.
+
+#### 3] Configuration to run the httpserver.py at startup using systemd (just like the instructions for having homebridge running using systemd)
+
+`sudo nano /lib/systemd/system/pysmartblinds.service
+
+Add the following text:
+```
+[Unit]
+Description=My Script Service
+After=multi-user.target
+
+[Service]
+WorkingDirectory=/home/pi/
+User=pi
+Type=idle
+ExecStart=/usr/bin/python3 /home/pi/httpserver.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+exit by hitting ctrl-x and hitting y to save.
+Then continue with the following commands to start it up:
+```
+sudo chmod 644 /lib/systemd/system/pysmartblinds.service
+sudo systemctl daemon-reload
+sudo systemctl enable pysmartblinds.service
+sudo systemctl start pysmartblinds.service
+```
+And if you want to check the status:
+
+`sudo systemctl status pysmartblinds.service`
+
+The httpserver.py should now be running.
 
 # That's all
 
