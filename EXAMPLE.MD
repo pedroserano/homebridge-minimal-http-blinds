@@ -4,7 +4,7 @@
 
 - Homebridge server is : `192.168.1.22`
 - Raspberry Pi with the Python script controlling the blinds : `192.168.1.55`
-- You have your MAC address and key for each blind you wish to control by [following these instructions](https://github.com/dnschneid/pysmartblinds/blob/master/README.md).
+- You have your MAC address and key for each blind you wish to control by [following these instructions](https://github.com/dnschneid/pysmartblinds/blob/master/README.md#discovering-mac-and-keys-for-blinds).
 
 ## 2] Python installation
 
@@ -20,7 +20,7 @@ or setting up a systemd process to run it automatically as per the directions be
 
 ## 3] Python Script configuration
 
-Replace the BLINDS section of httpserver.py with your blind information. This requires finding the key. Whatever you name each blind is what needs to go in the config.json urls. The description can be whatever you want. AGAIN, [the MAC address and key you must follow these instructions to get for your own blinds](https://github.com/dnschneid/pysmartblinds/blob/master/README.md).
+Replace the BLINDS section of httpserver.py with your blind information. This requires finding the key. Whatever you name each blind is what needs to go in the config.json urls. The description can be whatever you want. AGAIN, [the MAC address and key you must follow these instructions to get for your own blinds](https://github.com/dnschneid/pysmartblinds/blob/master/README.md#discovering-mac-and-keys-for-blinds).
 
 ```
 BLINDS = {
