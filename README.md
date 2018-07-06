@@ -2,7 +2,7 @@
 
 ### What is it?
 
-**homebridge-mysmartblinds** is a minimalistic blinds management plugin for homebridge using python.
+**homebridge-mysmartblinds** is a minimalistic mysmartblinds management plugin for homebridge using python.
 
 The features:
 - You can control your own mysmartblinds.
