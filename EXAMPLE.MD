@@ -13,7 +13,7 @@ sudo apt install -y python3-pip
 pip3 install pygatt
 pip3 install pexpect
 ````
-Finally, copy the two python files, httpserver.py and pysmartblinds.py to your raspberry pi's home folder.
+Finally, copy the two python files in this projects python folder, httpserver.py and pysmartblinds.py, to your raspberry pi's home folder.
 You must either run the program from the command line by typing:
 `python3 httpserver.py` 
 or setting up a systemd process to run it automatically as per the directions below.
