@@ -18,8 +18,13 @@ but still wants a straightforward way to communicate with your mysmartblinds (ho
 
 [Click here](EXAMPLE.MD) for step-by-step instructions.
 
-# Enhancements I would love help with
+## Enhancements I would love help with
 
 - Using noble to communicate directly between homebridge and the ble blinds, which would probably help with connection and timeout issues
 - Finding the ble code for battery status, and adding a homebridge characteristic to support reporting on battery level in homekit
 - Support for 0 to 200 down closed to up closed on the blinds, not just 0 to 100 down closed to open, to support tilting closed all the way up and down
+
+## Credits
+
+* Nicnl - homebridge-minimal-http-blinds
+* dnschneid - pysmartblinds
