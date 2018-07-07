@@ -77,7 +77,7 @@ MinimalisticHttpBlinds.prototype.update_current_position = function() {
     request({
         url: this.get_current_position_url,
         method: this.get_current_position_method,
-        timeout: 5000
+        timeout: 10000
     }, function(error, response, body) {
         if (error) {
             this.log('Error when polling current position.');
@@ -125,7 +125,7 @@ MinimalisticHttpBlinds.prototype.update_current_state = function() {
     request({
         url: this.get_current_state_url,
         method: this.get_current_state_method,
-        timeout: 5000
+        timeout: 10000
     }, function(error, response, body) {
         if (error) {
             this.log('Error when polling current state.');
