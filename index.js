@@ -4,11 +4,11 @@ var Service, Characteristic;
 module.exports = function(homebridge) {
     Service = homebridge.hap.Service;
     Characteristic = homebridge.hap.Characteristic;
-    homebridge.registerAccessory('homebridge-minimal-http-blinds', 'MinimalisticHttpBlinds', MinimalisticHttpBlinds);
-    console.log('Loading MinimalisticHttpBlinds accessories...');
+    homebridge.registerAccessory('homebridge-mysmartblinds', 'mysmartblinds', mysmartblinds);
+    console.log('Loading mysmartblinds accessories...');
 };
 
-function MinimalisticHttpBlinds(log, config) {
+function mysmartblinds(log, config) {
     this.log = log;
 
     // Required parameters
@@ -44,7 +44,7 @@ function MinimalisticHttpBlinds(log, config) {
     this.init_service();
 }
 
-MinimalisticHttpBlinds.prototype.init_service = function() {
+mysmartblinds.prototype.init_service = function() {
     this.service = new Service.WindowCovering(this.name);
 
     this.service.getCharacteristic(Characteristic.CurrentPosition).on('get', function(callback) {
@@ -65,15 +65,15 @@ MinimalisticHttpBlinds.prototype.init_service = function() {
     }.bind(this));
 };
 
-MinimalisticHttpBlinds.prototype.start_current_position_polling = function() {
+mysmartblinds.prototype.start_current_position_polling = function() {
     setTimeout(this.update_current_position.bind(this), this.get_current_position_polling_millis);
 };
 
-MinimalisticHttpBlinds.prototype.start_current_state_polling = function() {
+mysmartblinds.prototype.start_current_state_polling = function() {
     setTimeout(this.update_current_state.bind(this), this.get_current_state_polling_millis);
 };
 
-MinimalisticHttpBlinds.prototype.update_current_position = function() {
+mysmartblinds.prototype.update_current_position = function() {
     request({
         url: this.get_current_position_url,
         method: this.get_current_position_method,
@@ -121,7 +121,7 @@ MinimalisticHttpBlinds.prototype.update_current_position = function() {
     }.bind(this));
 };
 
-MinimalisticHttpBlinds.prototype.update_current_state = function() {
+mysmartblinds.prototype.update_current_state = function() {
     request({
         url: this.get_current_state_url,
         method: this.get_current_state_method,
@@ -177,7 +177,7 @@ MinimalisticHttpBlinds.prototype.update_current_state = function() {
 };
 
 
-MinimalisticHttpBlinds.prototype.set_target_position = function(position, callback, context) {
+mysmartblinds.prototype.set_target_position = function(position, callback, context) {
     if (context && context.plz_do_not_actually_move_the_blinds) {
         this.log('set_target_position is ignoring an actual request...');
         callback(null, position);
@@ -198,6 +198,6 @@ MinimalisticHttpBlinds.prototype.set_target_position = function(position, callba
     }.bind(this));
 };
 
-MinimalisticHttpBlinds.prototype.getServices = function() {
+mysmartblinds.prototype.getServices = function() {
     return [this.service];
 };
