@@ -29,13 +29,13 @@ BLINDS = {
         'mac': 'AA:BB:CC:DD:EE:FF',
         'key': (0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0xaa)
     },
-        'living_room_right’: {
-        'description': 'Living Room Right’,
+        'living_room_right': {
+        'description': 'Living Room Right',
         'mac': 'AA:BB:CC:DD:EE:FF',
         'key': (0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0xaa)
     },
-        'living_room_left’: {
-        'description': 'Living Room Left’,
+        'living_room_left': {
+        'description': 'Living Room Left',
         'mac': 'AA:BB:CC:DD:EE:FF',
         'key': (0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0xaa)
     },
